@@ -1,0 +1,17 @@
+{
+  "name": "raj-chat",
+  "version": "1.0.0",
+  "description": "Chatting application using socket.io",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.0",
+    "socket.io": "^4.5.0"
+  }
+}
