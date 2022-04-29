@@ -27,13 +27,18 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send", (message) => {
-    socket.broadcast.emit("receive", {
-      message: message,
-      name: users[socket.id],
-    });
+    if (users[socket.id]) {
+      socket.broadcast.emit("receive", {
+        message: message,
+        name: users[socket.id],
+      });
+    } else {
+      socket.emit("no-user", message);
+    }
   });
 
   socket.on("disconnect", (message) => {
+    if (!users[socket.id]) return;
     socket.broadcast.emit("left", users[socket.id]);
     delete users[socket.id];
   });
