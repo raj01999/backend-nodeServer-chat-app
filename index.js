@@ -45,22 +45,25 @@ io.on("connection", (socket) => {
         users: users,
       });
 
-      socket.emit("no-user", users);
+      socket.emit("append-user", users);
     } else {
-      socket.emit("no-user", users);
+      socket.emit("no-user", name);
     }
   });
 
   socket.on("msg-send", (msg) => {
     const obj = users[socket.id];
+
     if (obj) {
       socket.broadcast.emit("msg-receive", {
         msg: msg,
         name: obj.name,
         users: users,
       });
+
+      socket.emit("msg-permission", msg);
     } else {
-      socket.emit("no-user", users);
+      socket.emit("no-user", msg);
     }
   });
 
